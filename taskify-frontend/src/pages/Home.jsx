@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useContext } from "react"
-import { Box, Typography } from "@mui/material"
+import { Box, Typography, Button } from "@mui/material"
 import TaskFilter from "../components/TaskFilter"
 import TaskList from "../components/TaskList"
 import AssignmentIcon from "@mui/icons-material/Task"
 import LogoutIcon from "@mui/icons-material/Logout"
+import AddIcon from "@mui/icons-material/Add"
 import { AuthContext } from "../context/AuthContext"
 import { getTasks, deleteTask } from "../api"
+import { useNavigate } from "react-router-dom"
 
 export default function Home() {
+  const navigate = useNavigate()
   const [status, setStatus] = useState("all")
   const [priority, setPriority] = useState("all")
   const [tasks, setTasks] = useState([])
 
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext)
 
   useEffect(() => {
     const filters = {}
@@ -97,8 +100,10 @@ export default function Home() {
             My Tasks
           </Typography>
 
-          <Box display="flex" columnGap={2}>
-            {user ? <Typography>Hello, {user.username}</Typography>) : null}
+          <Box display="flex" columnGap={2} sx={{ alignItems: "center" }}>
+            {user ? (
+              <Typography mr={1}>Hello, {user.username}</Typography>
+            ) : null}
             <Button
               variant="contained"
               startIcon={<AddIcon />}

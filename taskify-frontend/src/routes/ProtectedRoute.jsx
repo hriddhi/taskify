@@ -3,8 +3,8 @@ import { Navigate, Outlet } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 
 const ProtectedRoute = () => {
-  const { token } = useContext(AuthContext);
-  console.log(token)
+  const { token } = useContext(AuthContext)
+  console.log("token from protected route", token)
 
   // If no token, redirect to login
   if (!token) {

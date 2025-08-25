@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react"
-import { login } from "../api"
+import { login as loginApi } from "../api"
 import { useNavigate, Link } from "react-router-dom"
 import {
   TextField,
@@ -25,7 +25,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const { data } = await login(form)
+      const { data } = await loginApi(form)
       login(data.token, data.user)
       navigate("/") // Redirect on success
     } catch (err) {

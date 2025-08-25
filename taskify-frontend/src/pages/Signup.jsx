@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { signup } from "../api"
 import { useNavigate } from "react-router-dom"
 import { TextField, Button, Container, Typography, Box } from "@mui/material"
@@ -19,7 +19,7 @@ export default function Signup() {
     e.preventDefault()
     try {
       const { data } = await signup(form)
-      login(data.token, data.user);
+      login(data.token, data.user)
       navigate("/") // Redirect on success
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed")
