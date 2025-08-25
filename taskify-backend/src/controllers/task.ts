@@ -3,7 +3,10 @@ import Task from "../models/Task"
 // Create a task
 const createTask = async (req: any, res: any) => {
     try {
-        const task = new Task(req.body)
+        const task = new Task({
+            ...req.body,
+            createdBy: createdBy: req.user._id // authenticated user's ID
+        })
         await task.save()
         res.status(201).json(task)
     } catch (err: any) {
@@ -16,7 +19,7 @@ const createTask = async (req: any, res: any) => {
 const getTask = async (req: any, res: any) => {
     try {
         const { status, priority } = req.query
-        let filters: any = {}
+        let filters: any = { createdBy: req.user._id }
         if (status) filters.status = status
         if (priority) filters.priority = priority
 
@@ -31,7 +34,7 @@ const getTask = async (req: any, res: any) => {
 // Get a task by ID
 const getTaskById = async (req: any, res: any) => {
     try {
-        const task = await Task.findById(req.params.id)
+        const task = await Task.findOne({ _id: req.params.id, createdBy: req.user._id })
         if (task) res.json(task)
         else res.status(404).json({ error: "Not found" })
     } catch (err: any) {
