@@ -27,11 +27,7 @@ export default function TaskList({ tasks, onDelete }) {
   return (
     <Container
       sx={{
-        maxWidth: "calc(4 * 280px + 3 * 24px)",
         minWidth: 300,
-        margin: "0 auto",
-        paddingTop: 1,
-        paddingBottom: 1,
       }}
     >
       <Box
@@ -39,7 +35,7 @@ export default function TaskList({ tasks, onDelete }) {
           display: "flex",
           flexWrap: "wrap",
           gap: 3,
-          width: "fit-content",
+          p: 0,
         }}
       >
         {tasks.length === 0 ? (

@@ -81,6 +81,8 @@ export default function Home() {
       <Box component="main" sx={{ flexGrow: 1, overflowY: "auto" }}>
         <Box
           sx={{
+            height: "42px",
+            px: 3,
             mb: 3,
             display: "flex",
             alignItems: "center",
