@@ -24,12 +24,6 @@ import { useNavigate } from "react-router-dom"
 export default function TaskList({ tasks, onDelete }) {
   const navigate = useNavigate()
 
-  const handleLogout = () => {
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    navigate("/login") // Redirect to login page
-  }
-
   return (
     <Container
       sx={{
@@ -40,47 +34,6 @@ export default function TaskList({ tasks, onDelete }) {
         paddingBottom: 1,
       }}
     >
-      <Box
-        sx={{
-          mb: 3,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 2,
-        }}
-      >
-        <Typography
-          variant="h5"
-          sx={{
-            fontWeight: "bold",
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <AssignmentIcon fontSize="medium" color="primary" />
-          My Tasks
-        </Typography>
-
-        <Box display="flex" columnGap={2}>
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            onClick={() => navigate("/tasks/new")}
-          >
-            New Task
-          </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            startIcon={<LogoutIcon />}
-            onClick={handleLogout}
-            sx={{ mr: 1 }}
-          >
-            Logout
-          </Button>
-        </Box>
-      </Box>
       <Box
         sx={{
           display: "flex",

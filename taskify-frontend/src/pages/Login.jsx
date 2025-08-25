@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { login } from "../api"
 import { useNavigate, Link } from "react-router-dom"
 import {
@@ -9,11 +9,14 @@ import {
   Box,
   Stack,
 } from "@mui/material"
+import { UserContext } from "./context/UserContext"
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" })
   const [error, setError] = useState(null)
   const navigate = useNavigate()
+
+  const { login } = useContext(UserContext)
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -23,8 +26,8 @@ export default function Login() {
     e.preventDefault()
     try {
       const { data } = await login(form)
+      login(data.user)
       localStorage.setItem("token", data.token)
-      localStorage.setItem("user", JSON.stringify(data.user))
       navigate("/") // Redirect on success
     } catch (err) {
       setError(err.response?.data?.message || "Login failed")

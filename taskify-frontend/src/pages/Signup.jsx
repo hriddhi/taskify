@@ -2,11 +2,14 @@ import React, { useState } from "react"
 import { signup } from "../api"
 import { useNavigate } from "react-router-dom"
 import { TextField, Button, Container, Typography, Box } from "@mui/material"
+import { UserContext } from "./context/UserContext"
 
 export default function Signup() {
   const [form, setForm] = useState({ username: "", email: "", password: "" })
   const [error, setError] = useState(null)
   const navigate = useNavigate()
+
+  const { login } = useContext(UserContext)
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -16,8 +19,8 @@ export default function Signup() {
     e.preventDefault()
     try {
       const { data } = await signup(form)
+      login(data.user);
       localStorage.setItem("token", data.token)
-      localStorage.setItem("user", JSON.stringify(data.user))
       navigate("/") // Redirect on success
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed")
