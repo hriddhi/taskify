@@ -38,7 +38,6 @@ export default function Login() {
       <Typography variant="h4" mb={3}>
         Login
       </Typography>
-      {error && <Typography color="error">{error}</Typography>}
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -62,6 +61,7 @@ export default function Login() {
           onChange={handleChange}
           required
         />
+        {error && <Typography color="error">{error}</Typography>}
         <Button variant="contained" type="submit">
           Log In
         </Button>

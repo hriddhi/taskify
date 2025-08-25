@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from "react"
 import { Box, Typography, Button } from "@mui/material"
 import TaskFilter from "../components/TaskFilter"
 import TaskList from "../components/TaskList"
-import AssignmentIcon from "@mui/icons-material/Task"
+import AssignmentIcon from "@mui/icons-material/Assignment"
+import TaskIcon from "@mui/icons-material/Task"
 import LogoutIcon from "@mui/icons-material/Logout"
 import AddIcon from "@mui/icons-material/Add"
 import { AuthContext } from "../context/AuthContext"
@@ -52,7 +53,7 @@ export default function Home() {
             textDecorationLine: "underline",
           }}
         >
-          <AssignmentIcon fontSize="large" color="primary" />
+          <TaskIcon fontSize="large" color="primary" />
           Taskify
         </Typography>
         <Box

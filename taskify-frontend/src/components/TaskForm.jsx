@@ -42,7 +42,7 @@ export default function TaskForm({ onSubmit, initialTask = {} }) {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h5" sx={{ mb: 3, mt: 2 }}>
+      <Typography variant="h5" sx={{ mb: 2, mt: 2, fontWeight: "bold" }}>
         {initialTask._id ? "Edit Task" : "Add New Task"}
       </Typography>
       <Box
