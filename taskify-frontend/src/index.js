@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client"
 import App from "./App"
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material"
 import { BrowserRouter } from "react-router-dom"
-import { UserProvider } from "./context/UserContext"
+import { AuthProvider } from "./context/AuthContext"
 
 const theme = createTheme({
   palette: {
@@ -22,9 +22,9 @@ createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
     <CssBaseline /> {/* resets default CSS */}
     <BrowserRouter>
-      <UserProvider>
+      <AuthProvider>
         <App />
-      <UserProvider>
+      <AuthProvider>
     </BrowserRouter>
   </ThemeProvider>
 )

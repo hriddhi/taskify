@@ -4,7 +4,7 @@ import TaskFilter from "../components/TaskFilter"
 import TaskList from "../components/TaskList"
 import AssignmentIcon from "@mui/icons-material/Task"
 import LogoutIcon from "@mui/icons-material/Logout"
-import { UserContext } from "./context/UserContext"
+import { AuthContext } from "../context/AuthContext"
 import { getTasks, deleteTask } from "../api"
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
   const [priority, setPriority] = useState("all")
   const [tasks, setTasks] = useState([])
 
-  const { user, logout } = useContext(UserContext);
+  const { user, logout } = useContext(AuthContext);
 
   useEffect(() => {
     const filters = {}
@@ -25,7 +25,6 @@ export default function Home() {
 
   // Logout handler
   const handleLogout = () => {
-    localStorage.removeItem("token")
     logout()
     navigate("/login") // Redirect to login page
   }

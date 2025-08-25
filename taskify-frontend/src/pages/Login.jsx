@@ -9,14 +9,14 @@ import {
   Box,
   Stack,
 } from "@mui/material"
-import { UserContext } from "./context/UserContext"
+import { AuthContext } from "../context/AuthContext"
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" })
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
-  const { login } = useContext(UserContext)
+  const { login } = useContext(AuthContext)
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -26,8 +26,7 @@ export default function Login() {
     e.preventDefault()
     try {
       const { data } = await login(form)
-      login(data.user)
-      localStorage.setItem("token", data.token)
+      login(data.token, data.user)
       navigate("/") // Redirect on success
     } catch (err) {
       setError(err.response?.data?.message || "Login failed")

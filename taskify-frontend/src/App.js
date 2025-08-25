@@ -7,7 +7,7 @@ import Home from "./pages/Home"
 import AddTask from "./pages/AddTask"
 import TaskList from "./components/TaskList"
 import EditTask from "./pages/EditTask"
-import ProtectedRoute from "./components/ProtectedRoute"
+import ProtectedRoute from "./routes/ProtectedRoute"
 
 export default function App() {
   return (
