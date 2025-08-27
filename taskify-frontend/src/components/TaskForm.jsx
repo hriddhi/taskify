@@ -9,24 +9,29 @@ import {
   Box,
 } from "@mui/material"
 
-export default function TaskForm({ onSubmit, initialTask = {} }) {
+export default function TaskForm({
+  onSubmit,
+  initialTask = {},
+  hideHeader = false,
+  hideFooter = false,
+}) {
   const [task, setTask] = useState({
     title: "",
     description: "",
     dueDate: "",
-    priority: "Low",
-    status: "Pending",
-    ...initialTask,
+    priority: "",
+    status: "",
   })
 
   useEffect(() => {
     if (initialTask) {
+      console.log(initialTask)
       setTask({
         title: initialTask.title || "",
         description: initialTask.description || "",
         dueDate: initialTask.dueDate ? initialTask.dueDate.slice(0, 10) : "", // format yyyy-mm-dd
-        priority: initialTask.priority || "Low",
-        status: initialTask.status || "Pending",
+        priority: initialTask.priority || "",
+        status: initialTask.status || "",
       })
     }
   }, [])
@@ -42,9 +47,11 @@ export default function TaskForm({ onSubmit, initialTask = {} }) {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h5" sx={{ mb: 2, mt: 2, fontWeight: "bold" }}>
-        {initialTask._id ? "Edit Task" : "Add New Task"}
-      </Typography>
+      {hideHeader ? null : (
+        <Typography variant="h5" sx={{ mb: 2, mt: 2, fontWeight: "bold" }}>
+          {initialTask._id ? "Edit Task" : "Add New Task"}
+        </Typography>
+      )}
       <Box
         component="form"
         onSubmit={handleSubmit}
@@ -73,7 +80,6 @@ export default function TaskForm({ onSubmit, initialTask = {} }) {
           type="date"
           value={task.dueDate}
           onChange={handleChange}
-          InputLabelProps={{ shrink: true }}
           fullWidth
         />
         <TextField
@@ -99,9 +105,11 @@ export default function TaskForm({ onSubmit, initialTask = {} }) {
           <MenuItem value="Pending">Pending</MenuItem>
           <MenuItem value="Completed">Completed</MenuItem>
         </TextField>
-        <Button type="submit" variant="contained" color="primary">
-          {initialTask._id ? "Update Task" : "Save Task"}
-        </Button>
+        {hideFooter ? null : (
+          <Button type="submit" variant="contained" color="primary">
+            {initialTask._id ? "Update Task" : "Save Task"}
+          </Button>
+        )}
       </Box>
     </Container>
   )
